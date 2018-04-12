@@ -1,0 +1,42 @@
+body{
+    background-image: url("../images/galaxy11.jpg");
+}
+
+.container  {
+    background-color: yellow;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.jumbotron  {
+    width: 980px;
+    margin: 0 auto; 
+    background-color: lightgray;
+}
+
+#button {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#slideShow  {
+    background-color: greenyellow;
+    text-align: center;
+}
+
+
+#timer  {
+    background-color: pink;
+}
+
+#subContainer   {
+    background-color: orange;
+    width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#answers    {
+    background-color: lawngreen;
+    text-align: center;
+}

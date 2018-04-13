@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     // Count will keep track of the index of the currently displaying slideshow picture
     var imageCount = 0;
-  
+    var currentQuestion = 10;
     var answer = "";
     var correctAnswers = 0;
     var incorrectAnswers = 0;
@@ -25,7 +25,7 @@ $(document).ready(function() {
           "Baxter Building", 
           "Xavier Institute"
         ],
-        correctAnswer = "a2"
+        correctAnswer: "a2"
     };
 
     var q2 =   {
@@ -36,7 +36,7 @@ $(document).ready(function() {
         "NY Times", 
         "Rolling Stone"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q3 =   {
@@ -47,7 +47,7 @@ $(document).ready(function() {
         "Ask and Embla", 
         "Toothgrinder and Toothgnasher"
       ],
-      correctAnswer = "a3"
+      correctAnswer: "a3"
     };
 
     var q4 =   {
@@ -58,7 +58,7 @@ $(document).ready(function() {
         "Vampire", 
         "Half Vampire"
       ],
-      correctAnswer = "a3"
+      correctAnswer: "a3"
     };
 
     var q5 =   {
@@ -69,7 +69,7 @@ $(document).ready(function() {
         "Reed Richards", 
         "Bruce Banner"
       ],
-      correctAnswer = "a2"
+      correctAnswer: "a2"
     };
 
     var q6 =   {
@@ -80,7 +80,7 @@ $(document).ready(function() {
         "Dum Dum Dugan", 
         "Sam Sawyer"
       ],
-      correctAnswer = "a0"
+      correctAnswer: "a0"
     };
 
     var q7 =   {
@@ -91,7 +91,7 @@ $(document).ready(function() {
         "Spider Man", 
         "Black Panther"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q8 =   {
@@ -102,7 +102,7 @@ $(document).ready(function() {
         "Destruction", 
         "Oblivion"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q9 =   {
@@ -113,7 +113,7 @@ $(document).ready(function() {
         "Ultron", 
         "Dr. Doom"
       ],
-      correctAnswer = "a2"
+      correctAnswer: "a2"
     };
 
     var q10 =   {
@@ -124,7 +124,7 @@ $(document).ready(function() {
         "Mars", 
         "Vulcan"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q11 =   {
@@ -135,7 +135,7 @@ $(document).ready(function() {
         "10", 
         "4"
       ],
-      correctAnswer = "a0"
+      correctAnswer: "a0"
     };
 
     var q12 =   {
@@ -146,7 +146,7 @@ $(document).ready(function() {
         "The same material as his body", 
         "Ice"
       ],
-      correctAnswer = "a2"
+      correctAnswer: "a2"
     };
 
     var q13 =   {
@@ -157,7 +157,7 @@ $(document).ready(function() {
         "Red Shull", 
         "Scorpio"
       ],
-      correctAnswer = "a3"
+      correctAnswer: "a3"
     };
 
     var q14 =   {
@@ -168,7 +168,7 @@ $(document).ready(function() {
         "Dr. Strange", 
         "Odin"
       ],
-      correctAnswer = "a2"
+      correctAnswer: "a2"
     };
 
     var q15 =   {
@@ -179,7 +179,7 @@ $(document).ready(function() {
         "Red Ghost", 
         "Red Hulk"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q16 =   {
@@ -190,7 +190,7 @@ $(document).ready(function() {
         "Michael Night", 
         "Piotr Rasputin"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q17 =   {
@@ -201,7 +201,7 @@ $(document).ready(function() {
         "Murderworld", 
         "A casino"
       ],
-      correctAnswer = "a2"
+      correctAnswer: "a2"
     };
 
     var q18 =   {
@@ -212,7 +212,7 @@ $(document).ready(function() {
         "A mountain in Asgard", 
         "Another planet"
       ],
-      correctAnswer = "a1"
+      correctAnswer: "a1"
     };
 
     var q19 =   {
@@ -223,7 +223,7 @@ $(document).ready(function() {
         "Polaris", 
         "Mystique"
       ],
-      correctAnswer = "a3"
+      correctAnswer: "a3"
     };
 
     var q20 =   {
@@ -234,26 +234,43 @@ $(document).ready(function() {
         "A Professor", 
         "A Policeman"
       ],
-      correctAnswer = "a0"
+      correctAnswer: "a0"
     };
 
+    console.log("current " + currentQuestion);
+    console.log("q" + currentQuestion);
+    function nextQuestion() {
+      var nextQuestion = ("q" + currentQuestion + "." + "question");
+      console.log("nq " + nextQuestion);
+      $("#question").html(nextQuestion);
+    }
 
+    // get player answer
+    $(".answer").on("click", function() {
+      answer = $(this).val();
+      if (answer === 1) {
+        correctAnswers++;
+      } 
+      else{
+        incorrectAnswers++
+      }
+      //wait 3 seconds then  call function
+      //to display next question
+     // setTimeout(nextQuestion, 3000);
+      console.log(answer);
+      console.log(correctAnswers);
+      console.log(incorrectAnswers);
+    })
 
-
-
-
-    console.log(q1.question);
-    console.log(q1.answers);
-    //console.log(q1.correctAnswer);
    //$("#answer0").text(q1.answers[0]);
    //$("#answer1").text(q1.answers[1]);
    //$("#answer2").text(q1.answers[2]);
    //$("#answer3").text(q1.answers[3]);
-   for (i=0; i<q1.answers.length; i++) {
-    $("#answer" + i).text(q1.answers[i]);
-    console.log("#answer" + i);
-    console.log(q1.answers[i]);
-   }
+   //for (i=0; i<q20.answers.length; i++) {
+   // $("#answer" + i).text(q20.answers[i]);
+   // console.log("#answer" + i);
+    //console.log(q20.answers[i]);
+   //}
    
    //$("#question").text(q1.question);
   
@@ -303,34 +320,9 @@ $(document).ready(function() {
       clearInterval(intervalId);
     }
 
-    function nextQuestion() {
-      $("#question").html(q1.question);
-    }
-
     //  Execute the run function.
-    run();
+      run();
 
-    // get player answer
-    $(".answer").on("click", function() {
-      answer = $(this).val();
-      if (answer === 1) {
-        correctAnswers++;
-      } 
-      else{
-        incorrectAnswers++
-      }
-      //wait 3 seconds then  call function
-      //to display next question
-      setTimeout(nextQuestion, 3000);
-      console.log(answer);
-      console.log(correctAnswers);
-      console.log(incorrectAnswers);
-    })
-
-
-
-
-    
     // This function will replace display whatever image it's given
     // in the 'src' attribute of the img tag.
     function displayImage() {
@@ -368,5 +360,7 @@ $(document).ready(function() {
 
     // This will run the display image function as soon as the page loads.
     displayImage();
+
+    nextQuestion();
 
 });  

@@ -1,9 +1,8 @@
 body{
-    background-image: url("../images/galaxy11.jpg");
+    background-image: url("../images/galaxy4.jpg");
 }
 
 .container  {
-    background-color: yellow;
     width: 1000px;
     margin: 0 auto;
 }
@@ -11,7 +10,9 @@ body{
 .jumbotron  {
     width: 980px;
     margin: 0 auto; 
-    background-color: lightgray;
+    background-color: black;
+    color: yellow;
+    border: solid yellow 5px;
 }
 
 #button {
@@ -19,24 +20,51 @@ body{
     text-align: center;
 }
 
+#startBtn    {
+    background-color: yellow;
+    color: black;
+}
+
 #slideShow  {
-    background-color: greenyellow;
     text-align: center;
 }
 
 
 #timer  {
-    background-color: pink;
+    background-color: yellow;
 }
 
 #subContainer   {
-    background-color: orange;
+    background-color: black;
+    color: yellow;
+    border: solid yellow 5px;
     width: 1000px;
     text-align: center;
     margin: 0 auto;
 }
 
 #answers    {
-    background-color: lawngreen;
-    text-align: center;
+    background-color:yellow;
+    color: black;
+    width: 200px;
+    margin: 0 auto;
+    border: solid 3px silver;
+}
+
+#image  {
+    height: 300px;
+    width: 300px;
+}
+.dynamicImage {
+    width: 400px;
+    height: 300px;
+    border: solid black 5px;
+}
+
+#showTimer  {
+    color: red;
+}
+
+#question   {
+    color: yellow;
 }

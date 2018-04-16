@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-    
     // Variables
     //=============================================================================================
 
@@ -41,9 +39,14 @@ $(document).ready(function() {
     var showImage;
     // Count will keep track of the index of the currently displaying slideshow picture
     var imageCount = 0;
+    // game timer
+    var number = 0;
+    //  Variable that will hold our interval ID when we execute the timer "run" function
+    var intervalId = "";
     // Track which question is being displayed
     var currentQuestion = 1;
     // Store answer selected by player
+    var questionsRemaining = 0;
     var answer = "";
     // Count of correct answers
     var correctAnswers = 0;
@@ -300,6 +303,10 @@ $(document).ready(function() {
           //$("#answer" + i).html(questionsObject.q1.answers[i]);
           $("#answer" + i).text(questionsObject.q1.answers[i]);
       }
+      // display timer
+      $("#showTimer").html("<h1>Seconds Remaining: </h1>");
+      //start timer
+      setTimeout(runTimer, 1000);
     }
 
     // get player answer
@@ -315,8 +322,10 @@ $(document).ready(function() {
             //$("#numberIncorrect").html(" " + incorrectAnswers);
             $("#numberIncorrect").text(" " + incorrectAnswers);
           }
-          // display next question
-          setTimeout(clearRadio, 1000);
+
+         //$("#questionsRemaining").text(questionsRemaining = 20 - (correctAnswers + incorrectAnswers));
+         stopTimer(); 
+         setTimeout(clearRadio, 1000);
           setTimeout(nextQuestion, 1200);
         })
 
@@ -327,11 +336,30 @@ $(document).ready(function() {
       }
     }
 
+    function timeExpired()  {
+      incorrectAnswers++;
+      $("#numberIncorrect").text(" " + incorrectAnswers);
+      setTimeout(clearRadio, 1000);
+      setTimeout(nextQuestion, 1200);
+    }
+
     function nextQuestion() {
       // update question tracker
       currentQuestion++;
       // determine if quiz has been completed
-      if (currentQuestion <= 5) {
+      if (number === 0 && currentQuestion <= 5) {
+          // identify next question in the questions object
+          var nextQuestion = (questionsObject["q" + currentQuestion].question);
+          // display next question
+          //$("#question").html(nextQuestion);
+          $("#question").text(nextQuestion);
+          // display answers
+          for (i = 0; i < 4; i++) {
+          $("#answer" + i).text(questionsObject["q" + currentQuestion].answers[i]);
+          }
+          // restart timer
+          setTimeout(runTimer, 1000);
+      } else if (number !== 0 && currentQuestion <= 5) {
         // identify next question in the questions object
         var nextQuestion = (questionsObject["q" + currentQuestion].question);
         // display next question
@@ -341,8 +369,8 @@ $(document).ready(function() {
         for (i = 0; i < 4; i++) {
             $("#answer" + i).text(questionsObject["q" + currentQuestion].answers[i]);
         }
-
-      } else  {
+        setTimeout(runTimer, 1000);
+      } else if (currentQuestion === 5) {
           //wait 2 seconds then  call function
           //setTimeout(endGame, 5000);
           //setTimeout(playAgain, 5200);
@@ -354,7 +382,8 @@ $(document).ready(function() {
     function playAgain()  {
       var confirmation = confirm("Would you like to play again?");
         if (confirmation === true) {
-        //set current question number to 1 
+        $(".jumbotron").hide();
+          //set current question number to 1 
         currentQuestion = 1;
         // clear answer value
         answer = "";
@@ -391,11 +420,11 @@ $(document).ready(function() {
     //===================================================================
     // game timer
     // Set our number counter to 120 (2 minutes)
-    var number = 120;
+    //var number = 120;
 
     //  Variable that will hold our interval ID when we execute
     //  the "run" function
-    var intervalId;
+    //var intervalId;
 
     //  When the start button gets clicked, execute the run function.
     /*$("#startBtn").on("click", function() {
@@ -408,7 +437,8 @@ $(document).ready(function() {
     //  that runs the decrement function once a second.
     //  *****BUG FIX******** 
     //  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
-    function run() {
+    function runTimer() {
+      number = 15;
       clearInterval(intervalId);
       intervalId = setInterval(decrement, 1000);
     }
@@ -422,14 +452,15 @@ $(document).ready(function() {
       //  Once number hits zero...
       if (number === 0) {
         //  ...run the stop function.
-        stop();
+        stopTimer();
+        timeExpired();
         //  Alert the user that time is up.
-        setTimeout(alert("Times Up!"), 2000);
+        //setTimeout(alert("Times Up!"), 2000);
       }
     }
 
     //  The stop function
-    function stop() {
+    function stopTimer() {
       //  Clears our intervalId
       //  We just pass the name of the interval
       //  to the clearInterval function.
@@ -481,8 +512,8 @@ $(document).ready(function() {
     // click events
     $("#startBtn").on("click", function() {
       startGame();
-      run();
-      startSlideshow();
+      //setTimeout(runTimer, 2000);
+      //startSlideshow();
     });
 
 

@@ -13,6 +13,12 @@ body{
     background-color: black;
     color: yellow;
     border: solid yellow 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#gameHeader {
+    margin-top: 0px;
 }
 
 #button {
@@ -30,8 +36,10 @@ body{
 }
 
 
-#timer  {
+#showTimer  {
     background-color: yellow;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 #subContainer   {
@@ -41,6 +49,11 @@ body{
     width: 1000px;
     text-align: center;
     margin: 0 auto;
+    padding-top: 0px;
+}
+
+#question   {
+    margin-top: 10px;
 }
 
 #answers    {
@@ -63,6 +76,11 @@ body{
 
 #showTimer  {
     color: red;
+    margin-top: 0px;
+}
+
+#correct, #incorrect    {
+    margin-top: 10px;
 }
 
 #question   {

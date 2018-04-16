@@ -278,6 +278,13 @@ $(document).ready(function() {
 
     };
 
+    console.log("showImage " + showImage);
+    console.log("imageCount " + imageCount);
+    console.log("currentQuestion " + currentQuestion);
+    console.log("answer " + answer);
+    console.log("correctAnswers" + correctAnswers);
+    console.log("IncorrectAnswers" + incorrectAnswers);
+
     // Functions
     //====================================================================================
     function startGame()  {
@@ -285,15 +292,14 @@ $(document).ready(function() {
       $("#imageHolder").show();
       $("#answers").show();
       $("#subContainer").show();
-      $("#question").html(questionsObject.q1.question);
+      //$("#question").html(questionsObject.q1.question);
+      $("#question").text(questionsObject.q1.question);
 
       //display answers
       for (i = 0; i < questionsObject.q1.answers.length; i++) {
-          $("#answer" + i).html(questionsObject.q1.answers[i]);
+          //$("#answer" + i).html(questionsObject.q1.answers[i]);
+          $("#answer" + i).text(questionsObject.q1.answers[i]);
       }
-
-      //display counters
-      //???????????????????
     }
 
     // get player answer
@@ -301,11 +307,13 @@ $(document).ready(function() {
           answer = $(this).val();
           if (answer === questionsObject["q" + currentQuestion].correctAnswer) {
             correctAnswers++;
-            $("#numberCorrect").html(" " + correctAnswers);
+            //$("#numberCorrect").html(" " + correctAnswers);
+            $("#numberCorrect").text(" " + correctAnswers);
           } 
           else{
             incorrectAnswers++
-            $("#numberIncorrect").html(" " + incorrectAnswers);
+            //$("#numberIncorrect").html(" " + incorrectAnswers);
+            $("#numberIncorrect").text(" " + incorrectAnswers);
           }
           // display next question
           setTimeout(clearRadio, 1000);
@@ -323,23 +331,62 @@ $(document).ready(function() {
       // update question tracker
       currentQuestion++;
       // determine if quiz has been completed
-      if (currentQuestion <= 20) {
+      if (currentQuestion <= 5) {
         // identify next question in the questions object
         var nextQuestion = (questionsObject["q" + currentQuestion].question);
         // display next question
-        $("#question").html(nextQuestion);
+        //$("#question").html(nextQuestion);
+        $("#question").text(nextQuestion);
         // display answers
         for (i = 0; i < 4; i++) {
             $("#answer" + i).text(questionsObject["q" + currentQuestion].answers[i]);
         }
 
       } else  {
-        
+          //wait 2 seconds then  call function
+          //setTimeout(endGame, 5000);
+          //setTimeout(playAgain, 5200);
+          setTimeout(playAgain, 2000);
+
       }
     }
 
-
-  
+    function playAgain()  {
+      var confirmation = confirm("Would you like to play again?");
+        if (confirmation === true) {
+        //set current question number to 1 
+        currentQuestion = 1;
+        // clear answer value
+        answer = "";
+        // set correct answers to 0 and clear from display
+        $("#numberCorrect").text("");
+        correctAnswers = 0;
+        // set incorrect answers to 0 and clear from display
+        incorrectAnswers = 0;
+        $("#numberIncorrect").text("");
+        // start a new game
+        startGame();
+        /*//gameOver = false;
+        $("#number-to-guess").text("");
+        //set total score to 0 and clear total score from display
+        totalScore = 0;
+        $("#total-score").text("");
+        //clear game status from display
+        $("#game-status").text("");
+        //call function to select target number
+        targetNum();
+        //call function to assign crystal values and present images
+        crystalvalues();*/
+      } else {
+        //close window
+        closeWindow();
+      }
+      /* Firefox workaround*/
+      function closeWindow() {
+          window.open('','_parent','');
+          window.close();
+      }
+    }
    
     //===================================================================
     // game timer
@@ -351,14 +398,11 @@ $(document).ready(function() {
     var intervalId;
 
     //  When the start button gets clicked, execute the run function.
-    $("#startBtn").on("click", function() {
+    /*$("#startBtn").on("click", function() {
       startGame();
       run();
       startSlideshow();
-    });
-
-    //  When the stop button gets clicked, run the stop function.
-    $("#stop").on("click", stop);
+    });*/
 
     //  The run function sets an interval
     //  that runs the decrement function once a second.
@@ -380,7 +424,7 @@ $(document).ready(function() {
         //  ...run the stop function.
         stop();
         //  Alert the user that time is up.
-        alert("Time Up!");
+        setTimeout(alert("Times Up!"), 2000);
       }
     }
 
@@ -433,8 +477,13 @@ $(document).ready(function() {
     // This will run the display image function as soon as the page loads.
     displayImage();
 
-    
-
     //=======================================================================================================
+    // click events
+    $("#startBtn").on("click", function() {
+      startGame();
+      run();
+      startSlideshow();
+    });
+
 
 });  

@@ -428,7 +428,6 @@ $(document).ready(function() {
     // display image in the 'src' attribute of the img tag
     function displayImage() {
       imageCount = Math.floor(Math.random() * 30) + 1;
-      console.log("image count " + imageCount)
       $("#imageHolder").html("<img class=dynamicImage src=" + images[imageCount] + ">");
     };
 

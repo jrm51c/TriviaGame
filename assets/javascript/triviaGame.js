@@ -294,10 +294,10 @@ $(document).ready(function() {
       for (i = 0; i < questionsObject.q1.answers.length; i++) {
           $("#answer" + i).text(questionsObject.q1.answers[i]);
       }
-      // display number of questions remaining
-      $("#questionsRemaining").text(" " + questionsObject.length);
       // display an image
       displayImage();
+      // display number of questions remaining
+      $("#questionsRemaining").text(" " + questionsObject.length);
       // start timer
       setTimeout(runTimer, 1000);
     }
@@ -312,9 +312,9 @@ $(document).ready(function() {
           incorrectAnswers++
       }
       stopTimer(); 
-      displayImage();
       setTimeout(clearRadio, 1000);
       setTimeout(nextQuestion, 1200);
+      displayImage();
     });
 
     function clearRadio() {    
@@ -328,7 +328,7 @@ $(document).ready(function() {
     function timeExpired()  {
       incorrectAnswers++;
       setTimeout(clearRadio, 1000);
-      setTimeout(nextQuestion, 1200);
+      setTimeout(nextQuestion, 1200); 
       displayImage();
     };
 
@@ -427,7 +427,7 @@ $(document).ready(function() {
     // Math.floor(Math.random() * max - min + 1)) + min
     // display image in the 'src' attribute of the img tag
     function displayImage() {
-      imageCount = Math.floor(Math.random() * 30) + 1;
+      imageCount = Math.floor(Math.random() * 29) + 1;
       console.log("image count " + imageCount);
       $("#imageHolder").html("<img class=dynamicImage src=" + images[imageCount] + ">");
     };
